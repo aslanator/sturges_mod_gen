@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [randomMods, setRandomMods] = useState<string[]>([]);
+
+  function getRandom() {
+      const id = Math.floor(Math.random() * 27) + 1;
+      return `/mods/mod (${id}).jpg`
+  }
+
+  function random() {
+    const mods = [getRandom(), getRandom(), getRandom()];
+    setRandomMods(mods);
+  }
+
+  const mods = randomMods.map((mod, index) => <div key={index}><img src={mod}/></div>)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="mods">{mods}</div>
+      <button onClick={random}>Do it!</button>
     </div>
   );
 }
